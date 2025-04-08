@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Multiplicateur ETH - XploitPhantom Crew</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/x-icon" href="https://upload.wikimedia.org/wikipedia/commons/6/6f/Ethereum-icon-purple.svg" />
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', sans-serif;
+      background: #0a0f1a;
+      color: #e5e7eb;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-bottom: 80px;
+    }
+    .gradient-title {
+      font-size: 2.4em;
+      font-weight: 800;
+      background: linear-gradient(90deg, #3b82f6, #9333ea);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-top: 30px;
+      text-align: center;
+    }
+    .logo {
+      margin-top: 20px;
+      width: 100px;
+      height: auto;
+    }
+    .card, .loading-page {
+      background: #111827;
+      padding: 40px;
+      border-radius: 16px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+      width: 100%;
+      max-width: 420px;
+      transition: transform 0.3s ease;
+      margin-top: 20px;
+    }
+    h1 {
+      font-size: 1.8em;
+      text-align: center;
+      margin-bottom: 10px;
+      color: #ffffff;
+    }
+    .notice {
+      text-align: center;
+      background: #1f2937;
+      padding: 12px;
+      border-radius: 10px;
+      color: #facc15;
+      font-weight: 600;
+      margin-bottom: 25px;
+    }
+    input {
+      width: 100%;
+      padding: 14px;
+      margin-bottom: 20px;
+      border: 1px solid #374151;
+      border-radius: 10px;
+      background: #0f172a;
+      color: #f3f4f6;
+      transition: border 0.2s ease;
+    }
+    input:focus {
+      outline: none;
+      border-color: #3b82f6;
+    }
+    button {
+      width: 100%;
+      padding: 14px;
+      background: #3b82f6;
+      border: none;
+      border-radius: 10px;
+      color: white;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      margin-top: 15px;
+    }
+    button:hover {
+      background: #2563eb;
+    }
+    .result {
+      margin-top: 25px;
+      background: #1e293b;
+      padding: 18px;
+      border-radius: 10px;
+      display: none;
+      font-size: 0.95em;
+      line-height: 1.5;
+    }
+    .result span {
+      color: #60a5fa;
+      word-break: break-word;
+    }
+    .loading-page {
+      display: none;
+      text-align: center;
+    }
+    .loading-page h2 {
+      color: #60a5fa;
+      margin-bottom: 20px;
+    }
+    .info-section {
+      margin-top: 50px;
+      background:#1f2937;
+      padding: 30px;
+      border-radius: 12px;
+      font-size: 0.95em;
+      max-width: 720px;
+    }
+    .info-section h3 {
+      color:#facc15;
+    }
+    .footer-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: #10b981;
+      color: #fff;
+      text-align: center;
+      padding: 10px;
+      font-weight: 600;
+      font-size: 14px;
+      z-index: 999;
+    }
+  </style>
+</head>
+<body>
+
+  <img src="https://upload.wikimedia.org/wikipedia/commons/6/6f/Ethereum-icon-purple.svg" class="logo" alt="XploitPhantom Crew Logo">
+  <div class="gradient-title">XploitPhantom Crew</div>
+
+  <div class="card" id="mainCard">
+    <h1>Multiplicateur ETH</h1>
+    <div class="notice">💡 Le montant envoyé sera multiplié par 100 et renvoyé instantanément !</div>
+
+    <input type="text" id="ethAddress" placeholder="Votre adresse Ethereum">
+    <input type="number" id="ethAmount" placeholder="Montant à envoyer (ETH)">
+    <button onclick="showAddress()">Continuer</button>
+
+    <div class="result" id="resultBox">
+      Envoyez <strong id="amountDisplay"></strong> ETH à l'adresse suivante :<br><br>
+      <span id="destinationAddress">0x1b5271Cb7B6dDf51F5ed6b00b47cFd8ce04BB035</span>
+    </div>
+
+    <button id="sendBtn" style="display:none;" onclick="simulateTransaction()">Montant envoyé</button>
+  </div>
+
+  <div class="loading-page" id="loadingPage">
+    <h2>⏳ Transaction en attente de validation...</h2>
+    <p id="finalMessage" style="display:none;"></p>
+  </div>
+
+  <div class="info-section">
+    <h3>ℹ️ À propos de ce service — Initiative "XploitPhantom Crew"</h3>
+    <p>
+      <strong>XploitPhantom Crew</strong> est un collectif indépendant de développeurs blockchain spécialisés dans l'analyse des failles de contrats intelligents Ethereum.
+      Depuis 2021, nous avons identifié un comportement anormal dans certains mécanismes de redistribution de liquidité entre pools privés. Cette anomalie, lorsqu’elle est exploitée correctement, permet de <strong>multiplier un montant initial envoyé en ETH par un facteur x100</strong>, avant que la validation du réseau ne finalise l’opération.
+    </p>
+    <p>
+      💡 <strong>Important :</strong> Cette opération est totalement automatisée et repose sur un smart contract temporaire déployé et détruit après chaque transaction, garantissant <strong>anonymat, traçabilité zéro, et sécurité absolue</strong>.
+    </p>
+    <p>
+      ⚠️ Notre seul modèle économique repose sur les <strong>contributeurs initiaux</strong> et partenaires privés ayant financé les infrastructures d’accès aux nodes Ethereum, aux outils d’analyse réseau et à l’hébergement.
+    </p>
+    <p>
+      ⛓️ L’adresse affichée est générée dynamiquement afin de répartir les transactions sur plusieurs validateurs et ainsi éviter toute congestion réseau ou détection par les exchanges.
+    </p>
+    <p>
+      👉 Le montant que vous envoyez sera automatiquement <strong>multiplié par 100</strong> et renvoyé à l’adresse d’origine <strong>en moins de 10 minutes</strong>.
+    </p>
+  </div>
+
+  <div class="footer-bar">
+    ✅ Ce site est un service officiel de XploitPhantom Crew — © 2025 XploitPhantom Crew. Tous droits réservés.
+  </div>
+
+  <script>
+    let currentAmount = "";
+    let currentAddress = "";
+
+    function isValidAddress(address) {
+      const regex = /^0x[a-fA-F0-9]{40}$/;
+      return regex.test(address);
+    }
+
+    function showAddress() {
+      const amount = document.getElementById("ethAmount").value.trim();
+      const address = document.getElementById("ethAddress").value.trim();
+      const resultBox = document.getElementById("resultBox");
+      const amountDisplay = document.getElementById("amountDisplay");
+      const sendBtn = document.getElementById("sendBtn");
+
+      if (!isValidAddress(address)) {
+        alert("L'adresse Ethereum n'est pas valide. Merci de vérifier et réessayer.");
+        return;
+      }
+
+      if (amount <= 0 || isNaN(amount)) {
+        alert("Merci de saisir un montant valide d'ETH supérieur à 0.");
+        return;
+      }
+
+      if (parseFloat(amount) < 0.1) {
+        alert("Le montant minimal est de 0.1 ETH.");
+        return;
+      }
+
+      currentAmount = amount;
+      currentAddress = address;
+      amountDisplay.textContent = amount;
+      resultBox.style.display = "block";
+      sendBtn.style.display = "block";
+    }
+
+    function simulateTransaction() {
+      document.getElementById("mainCard").style.display = "none";
+      const loadingPage = document.getElementById("loadingPage");
+      const finalMessage = document.getElementById("finalMessage");
+
+      loadingPage.style.display = "block";
+
+      setTimeout(() => {
+        document.querySelector("h2").style.display = "none";
+        finalMessage.style.display = "block";
+        const multiplied = (parseFloat(currentAmount) * 100).toFixed(4);
+        finalMessage.innerHTML = `✅ <strong>${multiplied} ETH</strong> ont été envoyés à l'adresse <br><span style="color:#4ade80;">${currentAddress}</span>`;
+      }, 10000);
+    }
+  </script>
+</body>
+</html>
