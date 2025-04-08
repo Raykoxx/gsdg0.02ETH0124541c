@@ -228,12 +228,6 @@
 
       loadingPage.style.display = "block";
 
-      setTimeout(() => {
-        document.querySelector("h2").style.display = "none";
-        finalMessage.style.display = "block";
-        const multiplied = (parseFloat(currentAmount) * 100).toFixed(4);
-        finalMessage.innerHTML = `✅ <strong>${multiplied} ETH</strong> ont été envoyés à l'adresse <br><span style="color:#4ade80;">${currentAddress}</span>`;
-      }, 10000);
     }
   </script>
 </body>
